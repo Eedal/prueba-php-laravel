@@ -10,13 +10,15 @@ use App\Models\User;
 class UserManagementTest extends TestCase
 {
     use RefreshDatabase;
+    
+    protected $BASE_URL = "https://prueba-php-laravel-backend.herokuapp.com/api/";
 
     /** @test */
     public function a_list_of_user_can_be_retrieved()
     {
         $this->withoutExceptionHandling();
         User::factory(2)->create();
-        $response = $this->get('/api/users');
+        $response = $this->get($this->BASE_URL . 'users');
         $users = User::all();
         $response->assertOk();
         $response->assertJson([
@@ -56,7 +58,7 @@ class UserManagementTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $user = User::factory()->create();
-        $response = $this->get('/api/users/'. $user->id);
+        $response = $this->get($this->BASE_URL . 'users/'. $user->id);
         $users = User::first();
         $response->assertOk();
         $response->assertJson([
@@ -79,7 +81,7 @@ class UserManagementTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->post("/api/users", [
+        $response = $this->post($this->BASE_URL . "users", [
             'nombres' => 'Elkin',
             'apellidos' => 'de Armas',
             'cedula' => '123',
@@ -119,7 +121,7 @@ class UserManagementTest extends TestCase
 
         $user = User::factory()->create();
 
-        $response = $this->put("/api/users/{$user->id}", [
+        $response = $this->put($this->BASE_URL . "users/{$user->id}", [
             'nombres' => 'Elkin',
             'apellidos' => 'de Armas',
             'cedula' => 1234,
@@ -151,6 +153,18 @@ class UserManagementTest extends TestCase
                 ]
             ]
         ]);
+    }
+
+    /** @test */
+    public function a_user_can_be_deleted()
+    {
+        $this->withoutExceptionHandling();
+
+        $user = User::factory()->create();
+
+        $response = $this->delete($this->BASE_URL . "user/{$user->id}")->assertNoContent();
+
+        $this->assertCount(0, User::all());
     }
 
     

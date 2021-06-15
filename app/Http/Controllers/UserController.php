@@ -8,6 +8,7 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
@@ -63,4 +64,16 @@ class UserController extends Controller
         return new UserResource($user);
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Zone  $zone
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        User::destroy($id);
+        
+        return response([], Response::HTTP_NO_CONTENT);
+    }
 }
