@@ -36,7 +36,7 @@ class UserController extends Controller
         return new UserResource($user);
     }
 
-    /** 
+    /**   
      * Display the specified resource.
      *
      * @param  \App\Zone  $zone
