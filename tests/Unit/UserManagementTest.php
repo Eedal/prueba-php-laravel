@@ -153,8 +153,8 @@ class UserManagementTest extends TestCase
                 ]
             ]
         ]);
-    }
-
+    } 
+ 
     /** @test */
     public function a_user_can_be_deleted()
     {
