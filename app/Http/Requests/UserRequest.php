@@ -29,7 +29,7 @@ class UserRequest extends FormRequest
             'telefono' => 'not_regex:/[a-zA-Z]/',
             'nombres' => 'required'
         ];
-    }
+    } 
 
     public function messages()
     {
