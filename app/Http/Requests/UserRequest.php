@@ -22,7 +22,7 @@ class UserRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {
+    { 
         return [
             'cedula' => 'not_regex:/[a-zA-Z]/|required|unique:users,cedula,' . $this->route('user'),
             'correo' => 'required|email:rfc,dns|unique:users,correo,' . $this->route('user'),
