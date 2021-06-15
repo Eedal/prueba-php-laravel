@@ -31,7 +31,7 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        $user = User::create($request->input());
+        $user = User::create($request->all());
         
         return new UserResource($user);
     }
@@ -58,7 +58,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        $user->update($request->input());
+        $user->update($request->all());
 
         return new UserResource($user);
     }
