@@ -162,7 +162,7 @@ class UserManagementTest extends TestCase
 
         $user = User::factory()->create();
 
-        $response = $this->delete($this->BASE_URL . "user/{$user->id}")->assertNoContent();
+        $response = $this->delete($this->BASE_URL . "users/{$user->id}")->assertNoContent();
 
         $this->assertCount(0, User::all());
     }
