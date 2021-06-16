@@ -25,7 +25,7 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'cedula' => [new NotLetters, 'not_regex:/[a-zA-Z]/|required|unique:users,cedula,' . $this->route('user')],
+            'cedula' => [new NotLetters, 'required', 'unique:users,cedula,' . $this->route('user')],
             'correo' => 'required|email:rfc,dns|unique:users,correo,' . $this->route('user'),
             'telefono' => [new NotLetters]
         ];
