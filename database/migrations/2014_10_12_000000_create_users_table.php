@@ -16,11 +16,11 @@ class CreateUsersTable extends Migration
         Schema::dropIfExists('users');
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('nombres', 191)->require();
-            $table->string('apellidos', 191)->nullable();
-            $table->string('cedula', 191)->unique();
-            $table->string('correo', 191)->unique();
-            $table->string('telefono', 191)->nullable();
+            $table->string('nombres', 45)->nullable();
+            $table->string('apellidos', 45)->nullable();
+            $table->string('cedula', 45)->unique();
+            $table->string('correo', 45)->unique();
+            $table->string('telefono', 45)->nullable();
             $table->timestamps();
         });
     }

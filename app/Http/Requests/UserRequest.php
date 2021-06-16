@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\NotLetters;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserRequest extends FormRequest
@@ -22,12 +23,11 @@ class UserRequest extends FormRequest
      * @return array
      */
     public function rules()
-    { 
+    {
         return [
-            'cedula' => 'not_regex:/[a-zA-Z]/|required|unique:users,cedula,' . $this->route('user'),
+            'cedula' => [new NotLetters, 'not_regex:/[a-zA-Z]/|required|unique:users,cedula,' . $this->route('user')],
             'correo' => 'required|email:rfc,dns|unique:users,correo,' . $this->route('user'),
-            'telefono' => 'not_regex:/[a-zA-Z]/',
-            'nombres' => 'required'
+            'telefono' => [new NotLetters]
         ];
     } 
 
@@ -40,8 +40,7 @@ class UserRequest extends FormRequest
             'correo.required' => 'El campo correo es requerido',
             'correo.email' => 'El campo correo debe tener un formato de correo electronico',
             'correo.unique' => 'El campo correo que estás escribiendo ya fue tomado',
-            'telefono.not_regex' => 'El campo telefono no puede contener letras',
-            'nombres.required' => 'El campo nombres es requerido',
+            'telefono.not_regex' => 'El campo telefono no puede contener letras'
         ];
     }
 
